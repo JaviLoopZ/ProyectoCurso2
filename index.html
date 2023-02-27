@@ -6,22 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <title>Presupuesto</title>
 </head>
 
-<body>
+<body id="cuerpo">
     <div class="cabecero">
         <div class="presupuesto">
             <div class="presupuesto_titulo">
                 Presupuesto Disponible
             </div>
-            <div class="presupuesto_valor">
-                +2,000.00
+            <div id= "presupuesto" class="presupuesto_valor">
+                $0.00
             </div>
             <div class="presupuesto_ingreso limpiarEstilos">
                 <div class="presupuesto_ingreso--texto">Ingresos</div>
                 <div class="derecha limpiarEstilos">
-                    <div class="presupuesto_ingreso--valor">+4,000.00</div>
+                    <div id="ingresos" class="presupuesto_ingreso--valor">$0.00</div>
                     <div class="presupuesto_ingreso--porcentaje">&nbsp;</div>
                 </div>
             </div>
@@ -29,92 +30,47 @@
             <div class="presupuesto_egreso limpiarEstilos">
                 <div class="presupuesto_egreso--texto">Egresos</div>
                 <div class="derecha limpiarEstilos">
-                    <div class="presupuesto_egreso--valor">-1,900.00</div>
-                    <div class="presupuesto_egreso--porcentaje">45%</div>
+                    <div id="egresos" class="presupuesto_egreso--valor">$0.00</div>
+                    <div id="porcentaje" class="presupuesto_egreso--porcentaje">0%</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <form id="forma">
+    <!-- <form id="forma"> -->
         <div class="agregar">
             <div class="agregar_contenedor">
-                <select class="agregar_tipo" id="tipo">
+                <select class="agregar_tipo" id="tipo_mov">
                     <option value="ingreso" selected>+</option>
                     <option value="egreso">-</option>
                 </select>
-                <input type="text" class="agregar_descripcion" placeholder="Agregar Descripción" id="descripcion">
-                <input type="number" class="agregar_valor" value="0" step="any">
-                <button class="agregar_btn"><ion-icon name="checkmark-circle-outline"
+                <input type="text" id="txtDesc" class="agregar_descripcion" placeholder="Agregar Descripción">
+                <input type="number" id="txtValor" class="agregar_valor" value="0" step="any">
+                <button id="btn_cabecero" class="agregar_btn"><ion-icon name="checkmark-circle-outline"
                         title="Agregar"></ion-icon></button>
             </div>
         </div>
-    </form>
+    <!-- </form> -->
 
     <div class="contenedor limpiarEstilos">
         <div class="ingreso">
             <h2 class="ingreso_titulo">Ingresos</h2>
             <div id="lista-ingresos">
-                <div class="elemento limpiarEstilos">
-                    <div class="elemento_descripcion">Salario</div>
-                    <div class="derecha limpiarEstilos">
-                        <div class="elemento_valor">+2,200.00</div>
-                        <div class="elemento_eliminar">
-                            <button class="elemento_eliminar--btn">
-                                <ion-icon name="close-circle-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="elemento limpiarEstilos">
-                    <div class="elemento_descripcion">Venta Coche</div>
-                    <div class="derecha limpiarEstilos">
-                        <div class="elemento_valor">+1,500.00</div>
-                        <div class="elemento_eliminar">
-                            <button class="elemento_eliminar--btn">
-                                <ion-icon name="close-circle-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="egreso">
             <h2 class="egreso_titulo">Egresos</h2>
             <div id="lista_egresos">
-                <div class="elemento limpiarEstilos">
-                    <div class="elemento_descripcion">Renta departamento</div>
-                    <div class="derecha limpiarEstilos">
-                        <div class="elemento_valor">-900.00</div>
-                        <div class="elemento_porcentaje">21%</div>
-                        <div class="elemento_eliminar">
-                            <button class="elemento_eliminar--btn">
-                                <ion-icon name="close-circle-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="elemento limpiarEstilos">
-                    <div class="elemento_descripcion">Ropa</div>
-                    <div class="derecha limpiarEstilos">
-                        <div class="elemento_valor">-400.00</div>
-                        <div class="elemento_porcentaje">9%</div>
-                        <div class="elemento_eliminar">
-                            <button class="elemento_eliminar--btn">
-                                <ion-icon name="close-circle-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2.9.3/dist/umd/popper-core.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
+    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/Movimientos.js"></script>
+    <script type="module" src="./js/Datos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 

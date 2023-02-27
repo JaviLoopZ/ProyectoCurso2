@@ -256,3 +256,7 @@ h2 {
 .elemento:hover .elemento_eliminar--btn { display: block; }
 .elemento:hover .elemento_valor { transform: translateX(-20px); }
 .elemento:hover .elemento_porcentaje { transform: translateX(-20px); }
+
+.invalid{
+    border: 2px solid red;
+}
