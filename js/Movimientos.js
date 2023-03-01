@@ -6,14 +6,8 @@ export class Movimiento extends Dato
     constructor(descripcion, valor, tipo)
     {
         super(descripcion, valor, tipo); // se utiliza la palabra super para invocar al constructor de la clase padre
-        // this.descripcion = descripcion;
-        // this.valor = valor;
-        // this.tipo = tipo;
-        // this.contador++;
-        // this._id = this.contador;
-
-        
-
+        Movimiento.contador++;
+        this._id = Movimiento.contador;
     }
 
     get id()
