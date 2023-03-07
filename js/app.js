@@ -23,6 +23,7 @@ const cargarCabecero = () =>{
 
 }
 
+//Va aumentando el total de ingreso y egreso 
 const calcularMovimientos = () =>{
 
     totalIngreso =  totalEgreso = 0;
@@ -34,6 +35,7 @@ const calcularMovimientos = () =>{
     }
 }
 
+//Función para convertir el formato de la moneda 
 const formatoMoneda = (valor) => {
     return valor.toLocaleString('es-MX', {
     style: 'currency',
@@ -49,7 +51,7 @@ const formatoPorcentaje = (valor) =>{
         });
 }
 
-
+//Funcion para ir agregando los elementos html de los ingresos o egresos
 const cargarMovimientosHTML = () => {
 
     const listaIngresos = document.getElementById("lista-ingresos");
@@ -110,8 +112,10 @@ const cargarMovimientosHTML = () => {
     }
 }
 
+//Función para eliminar el movimiento seleccionado por medio del id del registro.
+//También elimina el contenido html del elemento
 const eliminarMovimiento = (id) =>{
-    //Aqui estoy utilizando una función de devolución de llamada para obtener el index
+    //Para el findIndex se utiliza una función de devolución de llamada
     const indiceMovimiento = movimientos.findIndex(function(mov) {
         return mov.id === id;
     });
@@ -131,6 +135,7 @@ function cargarApp()
     document.getElementById("txtValor").value = 0;
 }
 
+//Agrega el movimiento a la lista de movimientos ya sea Ingreso o Egreso
 function registrarMovimiento()
 {
     let  desc = document.getElementById("txtDesc").value;
@@ -159,6 +164,7 @@ $("#txtDesc").keypress(()=>{
     $("#txtDesc").removeClass('invalid');
 });
 
+//Le agrega la clase invalid a la descripción y valor si al querer agregar movimiento estos se van en blanco
 function CargarClaseInvalid()
 {
     const monto = document.getElementById("txtValor");
@@ -183,13 +189,87 @@ function limpiarCampos()
     document.getElementById('tipo_mov').value = "ingreso";
 }
 
-//esta función para limpiar los datos al momento de cargar la página
+//función para limpiar los datos al momento de cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     cargarApp();
 });
 
-const botonCabecero = document.getElementById('btn_cabecero');
-botonCabecero.addEventListener('click', registrarMovimiento);
+const botonAgregar = document.getElementById('btn_agregar');
+const container = document.getElementById("add_container");
+const txtDescrip = document.getElementById('txtDesc');
+const txtVal = document.getElementById('txtValor');
+botonAgregar.addEventListener('click', function(){
 
-// const btnEliminar = document.getElementById('btn-eliminar');
-// btnEliminar.addEventListener('click', eliminarMovimiento(this.parentNode));
+    const lblError = document.getElementById("errorMsg");
+    if(lblError != null)
+    {
+        lblError.remove();
+    }
+    if(txtDescrip.value == "" || txtVal.value == 0){
+        const msgError = document.createElement("div");
+        msgError.innerHTML = `
+            <label id="errorMsg" style="color: red; display: block;">Favor de completar los campos</label>
+        `;
+        container.appendChild(msgError);
+        CargarClaseInvalid();
+
+    }
+    else{
+            registrarMovimiento();
+    }
+});
+
+const textDescripcion = document.getElementById('txtDesc');
+textDescripcion.addEventListener('input', function() {
+
+    var valor = textDescripcion.value;
+    //Si la longitud del texto supera los 30 caracteres, se utiliza slice para cortar el valor
+    // Y se asinga nuevamente el valor al textbox
+    if (textDescripcion.value.length > 30) {
+        textDescripcion.value = textDescripcion.value.slice(0, 30);
+    }
+
+    var valido = 1;
+    //Se utiliza expresión regular para verificar si se presionó una letra
+    const regex = /^[a-zA-ZñÑ\s]+$/;
+    if(!regex.test(valor))
+    {
+        valido = 0;
+    }
+    
+    if(valido == 0)
+    {
+        //De nuevo se utiliza slice para volver a asignarle el valor al textbox pero omitiendo el caracter inválido
+        textDescripcion.value = textDescripcion.value.slice(0, textDescripcion.value.length - 1);
+    }
+});
+
+//Utilizo el evento mouseover para quitar la clase invalid 
+const txtDesc = document.getElementById("txtDesc");
+txtDesc.addEventListener("mouseover", function() {
+    const lblError = document.getElementById("errorMsg");
+    if(lblError != null)
+    {
+        lblError.remove();
+    }
+    txtDesc.classList.remove("invalid");
+});
+
+const txtValor = document.getElementById("txtValor");
+txtValor.addEventListener("mouseover", function() {
+    const lblError = document.getElementById("errorMsg");
+    if(lblError != null)
+    {
+        lblError.remove();
+    }
+    txtValor.classList.remove("invalid");
+});
+//---------------------------------------------------
+
+const txtValor2 = document.getElementById("txtValor");
+txtValor2.addEventListener("keypress", function(event) {
+    if (isNaN(event.key)) {
+        event.preventDefault();
+    }
+});
+

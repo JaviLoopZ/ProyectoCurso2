@@ -39,28 +39,32 @@
 
     <form id="forma" onsubmit="return false;">
         <div class="agregar">
-            <div class="agregar_contenedor">
-                <select class="agregar_tipo" id="tipo_mov">
-                    <option value="ingreso" selected>+</option>
-                    <option value="egreso">-</option>
+            <div class="agregar_contenedor" id="add_container">
+                <select class="agregar_tipo col-" id="tipo_mov">
+                    <option value="ingreso" selected>+ IN</option>
+                    <option value="egreso">- EG</option>
                 </select>
-                <input type="text" id="txtDesc" class="agregar_descripcion" placeholder="Agregar Descripción">
+                <input type="text" id="txtDesc" class="agregar_descripcion" placeholder="Agregar Descripción" >
                 <input type="number" id="txtValor" class="agregar_valor" value="0" pattern="[0-9]+">
-                <button id="btn_cabecero" class="agregar_btn"><ion-icon name="checkmark-circle-outline"
+                <button id="btn_agregar" class="agregar_btn"><ion-icon name="checkmark-circle-outline"
                         title="Agregar"></ion-icon></button>
+                        <br>
+                <!-- <label id="errorMsg" style="color: red; display: none;"></label> -->
             </div>
         </div>
     </form>
 
-    <div class="contenedor limpiarEstilos">
-        <div class="ingreso">
-            <h2 class="ingreso_titulo">Ingresos</h2>
-            <div id="lista-ingresos">
+    <div class="contenedor limpiarEstilos container">
+        <div class="row">
+            <div class="ingreso col-md-6">
+                <h2 class="ingreso_titulo">Ingresos</h2>
+                <div id="lista-ingresos">
+                </div>
             </div>
-        </div>
-        <div class="egreso">
-            <h2 class="egreso_titulo">Egresos</h2>
-            <div id="lista_egresos">
+            <div class="egreso col-md-6">
+                <h2 class="egreso_titulo">Egresos</h2>
+                <div id="lista_egresos">
+                </div>
             </div>
         </div>
     </div>
