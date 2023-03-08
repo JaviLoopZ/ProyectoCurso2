@@ -44,6 +44,7 @@ const formatoMoneda = (valor) => {
     });
 }
 
+//Función para convertir el valor a porcentaje 
 const formatoPorcentaje = (valor) =>{
     return valor.toLocaleString('es-MX', {
         style: 'percent',
@@ -155,14 +156,14 @@ function registrarMovimiento()
     }
 }
 
-$("#txtValor").keypress(()=>{
-    $("#txtValor").removeClass('invalid');
-});
+// $("#txtValor").keypress(()=>{
+//     $("#txtValor").removeClass('invalid');
+// });
 
 
-$("#txtDesc").keypress(()=>{
-    $("#txtDesc").removeClass('invalid');
-});
+// $("#txtDesc").keypress(()=>{
+//     $("#txtDesc").removeClass('invalid');
+// });
 
 //Le agrega la clase invalid a la descripción y valor si al querer agregar movimiento estos se van en blanco
 function CargarClaseInvalid()
@@ -244,19 +245,18 @@ textDescripcion.addEventListener('input', function() {
     }
 });
 
-//Utilizo el evento mouseover para quitar la clase invalid 
-const txtDesc = document.getElementById("txtDesc");
-txtDesc.addEventListener("mouseover", function() {
+//Utilizo el evento focus para quitar la clase invalid 
+textDescripcion.addEventListener("focus", function() {
     const lblError = document.getElementById("errorMsg");
     if(lblError != null)
     {
         lblError.remove();
     }
-    txtDesc.classList.remove("invalid");
+    textDescripcion.classList.remove("invalid");
 });
 
 const txtValor = document.getElementById("txtValor");
-txtValor.addEventListener("mouseover", function() {
+txtValor.addEventListener("focus", function() {
     const lblError = document.getElementById("errorMsg");
     if(lblError != null)
     {
@@ -266,9 +266,9 @@ txtValor.addEventListener("mouseover", function() {
 });
 //---------------------------------------------------
 
-const txtValor2 = document.getElementById("txtValor");
-txtValor2.addEventListener("keypress", function(event) {
-    if (isNaN(event.key)) {
+//Utilizo el evento keypress para evitar que usen la barra espaciadora en el campo de Valor
+txtValor.addEventListener("keypress", function(event) {
+    if (isNaN(event.key) || event.code === "Space") {
         event.preventDefault();
     }
 });
